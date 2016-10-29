@@ -13,7 +13,6 @@ class GridView extends \kartik\grid\GridView
 	public $export = [
 		'label' => 'Export',
 		'target' => '_self',
-		'showConfirmAlert' => false,
 	];
 	
 	public function init()
