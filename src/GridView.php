@@ -11,7 +11,7 @@ class GridView extends \kartik\grid\GridView
 	public $showFilters = true;
 	
 	public $export = [
-		'label' => 'Export',
+		'label' => 'Export Data to File',
 		'target' => '_self',
 	];
 	
