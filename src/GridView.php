@@ -32,6 +32,8 @@ class GridView extends \kartik\grid\GridView
 	
 	public $panelHeadingTemplate = '{heading}<div class="pull-right">{toolbar}</div><div class="clearfix"></div>';
 	
+	public $dataColumnClass = 'swilson1337\grid\DataColumn';
+	
 	public function init()
 	{
 		if (is_array($this->export))
