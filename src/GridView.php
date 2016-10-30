@@ -2,22 +2,32 @@
 
 namespace swilson1337\grid;
 
+use yii\helpers\ArrayHelper;
+
 class GridView extends \kartik\grid\GridView
 {
 	public $pjax = true;
 	
-	public $layout = "<div class=\"row\"><div class=\"col-sm-12\"><div class=\"pull-right\">{export}</div></div></div><br /><div class=\"row\"><div class=\"col-sm-12\">{items}</div></div><div class=\"row\"><div class=\"col-sm-6\">{summary}</div><div class=\"col-sm-6\"><div class=\"pull-right\">{pager}</div></div></div>";
-	
 	public $showFilters = true;
 	
-	public $export = [
-		'label' => 'Export Data to File',
+	private $defaultPanelOptions = [
+		'type' => GridView::TYPE_DEFAULT,
+		'after' => '{summary}',
+		'heading' => false,
+	];
+	
+	private $defaultExportOptions = [
+		'label' => 'Export Data To File',
 		'target' => '_self',
 	];
 	
 	public function init()
 	{
 		parent::init();
+		
+		$this->export = ArrayHelper::merge($this->defaultExportOptions, (is_array($this->export) ? $this->export : []));
+		
+		$this->panel = ArrayHelper::merge($this->defaultPanelOptions, (is_array($this->panel) ? $this->panel : []));
 		
 		if (!$this->showFilters)
 		{
