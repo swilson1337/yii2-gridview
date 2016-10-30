@@ -9,8 +9,8 @@ class GridView extends \kartik\grid\GridView
 	private static $defaultPanelOptions = [
 		'type' => GridView::TYPE_DEFAULT,
 		'after' => false,
-		'heading' => false,
 		'footer' => '<div class="pull-right">{summary}</div>',
+		'before' => false,
 	];
 	
 	private static $defaultExportOptions = [
@@ -20,13 +20,15 @@ class GridView extends \kartik\grid\GridView
 	
 	public $panelFooterTemplate = '<div class="pull-left kv-panel-pager">{pager}</div>{footer}<div class="clearfix"></div>';
 	
-	public $panelTemplate = '<div class="{prefix}{type}">{panelHeading}{panelBefore}<div class="panel-body">{items}</div>{panelAfter}{panelFooter}</div>';
-	
 	public $toggleData = false;
 	
 	public $pjax = true;
 	
 	public $showFilters = true;
+	
+	public $hover = true;
+	
+	public $panelHeadingTemplate = '{heading}<div class="pull-right">{toolbar}</div><div class="clearfix"></div>';
 	
 	public function init()
 	{
