@@ -28,6 +28,8 @@ class GridView extends \kartik\grid\GridView
 	
 	public $hover = true;
 	
+	public $condensed = true;
+	
 	public $panelHeadingTemplate = '{heading}<div class="pull-right">{toolbar}</div><div class="clearfix"></div>';
 	
 	public function init()
