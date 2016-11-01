@@ -34,6 +34,8 @@ class GridView extends \kartik\grid\GridView
 	
 	public $dataColumnClass = 'swilson1337\grid\DataColumn';
 	
+	public $filterPosition = 'header';
+	
 	public function init()
 	{
 		if (is_array($this->export))
