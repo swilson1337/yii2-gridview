@@ -47,16 +47,34 @@ class GridView extends \kartik\grid\GridView
 			$this->panel = ArrayHelper::merge(static::$defaultPanelOptions, $this->panel);
 		}
 		
-		$this->view->registerJs('$("#'.$this->id.' .filters").toggle(sessionStorage.getItem("'.$this->id.'-toggle-toolbar") === "true");');
-		
-		if ($this->showFilters && !empty($this->toolbar))
+		if ($this->showFilters && $this->filterModel !== null && count($this->filterModel->attributes) > 0)
 		{
+			if (!is_array($this->toolbar))
+			{
+				if (!empty($this->toolbar))
+				{
+					$this->toolbar = [
+						'content' => $this->toolbar,
+					];
+				}
+				else
+				{
+					$this->toolbar = [];
+				}
+			}
+			
 			array_unshift($this->toolbar, [
 				'content' => Html::button('<span class="glyphicon glyphicon-zoom-in"></span> Toggle Filters', [
 					'class' => 'btn btn-default',
-					'onClick' => 'sessionStorage.setItem("'.$this->id.'-toggle-toolbar", !$("#'.$this->id.' .filters").is(":visible")); $("#'.$this->id.' .filters").toggle("slow");',
+					'onClick' => 'sessionStorage.setItem("'.$this->id.'-toggle-toolbar", !$("#'.$this->id.' .filters").is(":visible")); $("#'.$this->id.' .filters").toggle(0);',
 				]),
 			]);
+			
+			$this->view->registerJs('if (sessionStorage.getItem("'.$this->id.'-toggle-toolbar") === "true") { $("#'.$this->id.' .filters").show(0); } else { $("#'.$this->id.' .filters").hide(0); }');
+		}
+		else
+		{
+			Html::addCssStyle($this->filterRowOptions, 'display: none;');
 		}
 		
 		parent::init();
