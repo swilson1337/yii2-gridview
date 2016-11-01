@@ -3,6 +3,7 @@
 namespace swilson1337\grid;
 
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 class GridView extends \kartik\grid\GridView
 {
@@ -34,8 +35,6 @@ class GridView extends \kartik\grid\GridView
 	
 	public $dataColumnClass = 'swilson1337\grid\DataColumn';
 	
-	public $filterPosition = 'header';
-	
 	public function init()
 	{
 		if (is_array($this->export))
@@ -48,9 +47,16 @@ class GridView extends \kartik\grid\GridView
 			$this->panel = ArrayHelper::merge(static::$defaultPanelOptions, $this->panel);
 		}
 		
-		if (!$this->showFilters)
+		$this->view->registerJs('$("#'.$this->id.' .filters").toggle(sessionStorage.getItem("'.$this->id.'-toggle-toolbar") === "true");');
+		
+		if ($this->showFilters && !empty($this->toolbar))
 		{
-			$this->filterRowOptions['style'] = 'display: none;';
+			array_unshift($this->toolbar, [
+				'content' => Html::button('<span class="glyphicon glyphicon-zoom-in"></span> Toggle Filters', [
+					'class' => 'btn btn-default',
+					'onClick' => 'sessionStorage.setItem("'.$this->id.'-toggle-toolbar", !$("#'.$this->id.' .filters").is(":visible")); $("#'.$this->id.' .filters").toggle("slow");',
+				]),
+			]);
 		}
 		
 		parent::init();
