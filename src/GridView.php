@@ -73,6 +73,8 @@ class GridView extends \kartik\grid\GridView
 			]);
 			
 			$this->view->registerJs('if (sessionStorage.getItem("'.$this->id.'-toggle-toolbar") === "true") { $("#'.$this->id.' .filters").show(0); } else { $("#'.$this->id.' .filters").hide(0); }');
+			
+			$this->view->registerJs('$("#'.$this->id.'-pjax").on("pjax:complete", function() { if (sessionStorage.getItem("'.$this->id.'-toggle-toolbar") === "true") { $("#'.$this->id.' .filters").show(0); } else { $("#'.$this->id.' .filters").hide(0); } });');
 		}
 		
 		parent::init();
