@@ -47,6 +47,8 @@ class GridView extends \kartik\grid\GridView
 			$this->panel = ArrayHelper::merge(static::$defaultPanelOptions, $this->panel);
 		}
 		
+		Html::addCssStyle($this->filterRowOptions, 'display: none;');
+		
 		if ($this->showFilters && $this->filterModel !== null && count($this->filterModel->attributes) > 0)
 		{
 			if (!is_array($this->toolbar))
@@ -71,10 +73,6 @@ class GridView extends \kartik\grid\GridView
 			]);
 			
 			$this->view->registerJs('if (sessionStorage.getItem("'.$this->id.'-toggle-toolbar") === "true") { $("#'.$this->id.' .filters").show(0); } else { $("#'.$this->id.' .filters").hide(0); }');
-		}
-		else
-		{
-			Html::addCssStyle($this->filterRowOptions, 'display: none;');
 		}
 		
 		parent::init();
