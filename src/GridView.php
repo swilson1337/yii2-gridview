@@ -19,6 +19,11 @@ class GridView extends \kartik\grid\GridView
 		'target' => '_self',
 	];
 	
+	private static $defaultPagerOptions = [
+		'firstPageLabel' => 'First',
+		'lastPageLabel' => 'Last',
+	];
+	
 	public $panelFooterTemplate = '<div class="pull-left kv-panel-pager">{pager}</div>{footer}<div class="clearfix"></div>';
 	
 	public $toggleData = false;
@@ -45,6 +50,11 @@ class GridView extends \kartik\grid\GridView
 		if (is_array($this->panel))
 		{
 			$this->panel = ArrayHelper::merge(static::$defaultPanelOptions, $this->panel);
+		}
+		
+		if (is_array($this->pager))
+		{
+			$this->pager = ArrayHelper::merge(static::$defaultPagerOptions, $this->pager);
 		}
 		
 		Html::addCssStyle($this->filterRowOptions, 'display: none;');
