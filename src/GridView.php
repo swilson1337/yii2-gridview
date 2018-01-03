@@ -83,7 +83,9 @@ class GridView extends \kartik\grid\GridView
 				if (!empty($this->toolbar))
 				{
 					$this->toolbar = [
-						'content' => $this->toolbar,
+						[
+							'content' => $this->toolbar,
+						],
 					];
 				}
 				else
