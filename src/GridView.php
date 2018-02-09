@@ -55,6 +55,10 @@ class GridView extends \kartik\grid\GridView
 	
 	public $panelBeforeTemplate = '{before}<div class="clearfix"></div>';
 	
+	public $itemLabelSingle = 'item';
+	
+	public $itemLabelPlural = 'items';
+	
 	public function init()
 	{
 		if (is_array($this->export))
